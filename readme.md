@@ -59,7 +59,7 @@ laurea (286)
 - USE `91_university`;
 - SHOW tables;
 - DESCRIBE `teachers`;
-- SELECT * FROM `teachers` WHERE `phone` is NULL;
+- SELECT COUNT(*) FROM `teachers` WHERE `phone` is NULL;
 
 # database intro library
 - Ci sono clienti che effettuano ordini.
