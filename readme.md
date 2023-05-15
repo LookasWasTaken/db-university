@@ -61,6 +61,30 @@ laurea (286)
 - DESCRIBE `teachers`;
 - SELECT COUNT(*) FROM `teachers` WHERE `phone` is NULL;
 
+9. SHOW databases;
+- USE `91_university`;
+- SHOW tables;
+- DESCRIBE `courses`;
+- SELECT COUNT(*) AS `total_courses`, `cfu` FROM `courses` GROUP BY `cfu`;
+
+10. SHOW databases;
+- USE `91_university`;
+- SHOW tables;
+- DESCRIBE `students`;
+- SELECT COUNT(*) AS `total_students`, YEAR(`date_of_birth`) AS `year_of_birth` FROM `students` GROUP BY `year_of_birth`;
+
+11. SHOW databases;
+- USE `91_university`;
+- SHOW tables;
+- DESCRIBE `exam_student`;
+- SELECT MIN(`vote`) AS `lowest_vote`, `exam_id` FROM `exam_student` GROUP BY `exam_id`;
+
+12. SHOW databases;
+- USE `91_university`;
+- SHOW tables;
+- DESCRIBE `exams`;
+- SELECT COUNT(*) AS `total_exams`, DAY(`date`) AS `day_of_exam` FROM `exams` WHERE MONTH(`month_of_exam`) = 7 GROUP BY `day_of_exam`;
+
 # database intro library
 - Ci sono clienti che effettuano ordini.
   Un ordine può contenere più prodotti e viene preparato da un dipendente.
