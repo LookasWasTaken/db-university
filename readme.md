@@ -8,6 +8,7 @@ laurea (286)
 6. Selezionare tutti i corsi di laurea magistrale (38)
 7. Da quanti dipartimenti è composta l'università? (12)
 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
+13. Selezionare il voto medio di superamento d'esame per ogni corso, con anche i dati del corso di laurea associato, ordinati per media di voto decrescente
 
 
 # QUERIES
@@ -85,81 +86,20 @@ laurea (286)
 - DESCRIBE `exams`;
 - SELECT COUNT(*) AS `total_exams`, DAY(`date`) AS `day_of_exam` FROM `exams` WHERE MONTH(`month_of_exam`) = 7 GROUP BY `day_of_exam`;
 
-# database intro library
-- Ci sono clienti che effettuano ordini.
-  Un ordine può contenere più prodotti e viene preparato da un dipendente.
-  Un ordine ha associato uno o più pagamenti (considerando eventuali tentativi falliti)       
 
-## data types:
-- strings: [ varchar(number), char(number), text, longtext ]
-- number: [ tinyint, small/medium int, int, int, bigint ]
-- decimals: [ float(i,d), double(i,d), decimal(i,d) ]
-- dates: [ DATETIME, DATE, YEAR, TIME, TIMESTRAP ]
+12. SHOW databases;
+- USE `91_university`;
+- SHOW tables;
+- DESCRIBE `degrees`;
+- SELECT `courses`.`id`, `courses`.`name`, `degrees`.`name` FROM `72_university`.`courses` JOIN `72_university`.`degrees` ON `courses`.`degree_id` = `degrees`.`id` WHERE `degrees`.`name` = "Corso di Laurea in Informatica";
 
-## data attributes:
-- PK -> primary key
-- AI -> auto increment
-- NN -> NOT NULL
-- UNIQUE 
-
-## dipartimenti:
-- id_dipartimento   | PK
-- nome
-
-## corsi di laurea:
-- id_corso_laurea   | PK
-- id_dipartimento   | FK
-- nome 
-- crediti
-
-## corsi:
-- id_corso          | PK
-- id_corso_laurea   | FK
-- id_cfu?               
-- nome
-
-## insegnanti:
-- id_insegnante     | PK
-- nome
-- cognome
-- email
-- password
-
-## esami:
-- id_esame          | PK
-- id_corso          | FK
-- id_insegnante     | FK             
-- id_cfu? 
-- voto
-- crediti
-- data
-
-## studenti:
-- id_studente       | PK
-- id_corso_laurea   | FK
-- id_voto           | FK
-- nome
-- cognome
-- email
-- password
-
-## iscrizioni:
-- id_iscrizione     | PK
-- id_studente       | FK
-- id_esame          | FK
-
-## voti:
-- id_voto           | PK
-- id_iscrizione     | FK
-
-
-
-
-
-
-
-
-
-
-
-
+13. SHOW databases;
+- USE `91_university`;
+- SHOW tables;
+- SELECT AVG(`exam_student`.`vote`) AS `average_vote`, `courses`.`name`, `degree`.`name`
+FROM `exam_student`
+JOIN `exams` ON `exam_student`.`exam_id` = `exams`.`id`
+JOIN `courses` ON `exams`.`course_id` = `courses`.`id`
+JOIN `degrees` ON `courses`.`degree_id` = `degrees`.`id`
+GROUP BY `courses`.`id`
+ORDER BY `average_vote` DESC;
